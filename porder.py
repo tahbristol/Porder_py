@@ -17,10 +17,8 @@ def about():
 def signup():
 	form = SignupForm()
 	if form.validate_on_submit():
-		import pdb; pdb.set_trace()
 		flash('Account created for {}!'.format(form.name.data), 'success')
 		return redirect(url_for('home'))
-	
 	return render_template('users/new.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
