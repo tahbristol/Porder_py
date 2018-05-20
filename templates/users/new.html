@@ -2,7 +2,8 @@
 
 {% block content %}
 <div class="container signupPage">
-  <form class="form-signin form-signup" action="/signup" method="post">
+  <form class="form-signin form-signup" action="" method="POST">
+		{{ form.hidden_tag() }}
     <h2 class="form-signin-heading">Sign Up</h2>
 		<div class="form-group">	
 			{% if form.name.errors %}

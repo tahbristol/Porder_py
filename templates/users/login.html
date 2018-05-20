@@ -2,7 +2,8 @@
 
 {% block content %}
 	<div class="container loginPage">
-	  <form class="form-signin" action="/login" method="post">
+	  <form class="form-signin" action="" method="POST">
+			{{ form.hidden_tag() }}
 	    <h2 class="form-signin-heading">
 	      Sign In
 			</h2>

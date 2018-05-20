@@ -19,18 +19,21 @@
     <div class="container welcome">
 
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12" id="flashMessageContainer">
 					{% with messages = get_flashed_messages(with_categories=True) %}
 						{% if messages %}
 							{% for category, message in messages %}
-								<div class="alert alert-{{ category }}">
+								<div class="alert alert-{{ category }}" id="flashMessage">
 									{{ message }}
 								</div>
 							{% endfor %}
 						{% endif %}
 					{% endwith %}
-          {% block content %}{% endblock %}
+          
         </div>
+				<div class="col-sm-12">
+					{% block content %}{% endblock %}
+				</div>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

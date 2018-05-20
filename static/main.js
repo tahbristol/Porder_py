@@ -1,5 +1,11 @@
 $(document).ready(function() {
-
+	
+	if ($('#flashMessage')) {
+		setTimeout(function() {
+			$('#flashMessage').fadeOut('slow')
+		}, 3000);
+	}
+	
   $("#addLine").on("click", function() {
     var table = $('.requests');
 
@@ -29,5 +35,5 @@ $(document).ready(function() {
     }
 
   });
-
+	
 });
