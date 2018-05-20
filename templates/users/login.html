@@ -1,41 +1,67 @@
 {% extends './layout.html' %}
 
 {% block content %}
-<div class="container loginPage">
-  <form class="form-signin" action="/login" method="post">
-    <h2 class="form-signin-heading">
-      Sign In
-		</h2>
+	<div class="container loginPage">
+	  <form class="form-signin" action="/login" method="post">
+	    <h2 class="form-signin-heading">
+	      Sign In
+			</h2>
 			<div class="form-group">	
-				{{ form.email(class="form-control", id="inputEmail", placeholder="Email Address")}}
+				
+				{% if form.email.errors %}
+					{{ form.email(class="form-control is-invalid", placeholder="Email Address")}}
+					
+					<div class="invalid-feedback">
+							{% for error in form.email.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+					</div>
+					
+				{% else %}
+					{{ form.email(class="form-control", placeholder="Email Address")}}
+				{% endif %}
+				
 			</div>
 			
-	   	<div class="form-group">
-				{{ form.password(class="form-control", id="inputPassword", placeholder="Password")}}
+			<div class="form-group">
+				
+				{% if form.password.errors %}
+					{{ form.password(class="form-control", placeholder="Password")}}
+					
+					<div class="invalid-feedback">
+							{% for error in form.password.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+					</div>
+				
+				{% else %}
+					{{ form.password(class="form-control", placeholder="Name")}}
+				{% endif %}
+				
 			</div>
-			
-	    <div class="form-group">
-				{{ form.submit(class="btn btn-lg btn-primary btn-block")}}
-			</div>
-      <label>
-        <input name="remember_me" type="checkbox" value="remember-me">
-        Remember me
-      </label>
-      <label>
-        <input id="guestBox" name="guest" type="checkbox" value="Guest">
-        Login as Guest
-      </label>
-    </div>
-   
-  </form>
+				
+		    <div class="form-group">
+					{{ form.submit(class="btn btn-lg btn-primary btn-block")}}
+				</div>
+	      <label>
+	        <input name="remember_me" type="checkbox" value="remember-me">
+	        Remember me
+	      </label>
+	      <label>
+	        <input id="guestBox" name="guest" type="checkbox" value="Guest">
+	        Login as Guest
+	      </label>
+	    </div>
+	   
+	  </form>
 
-  <p>
-    <small>Need an account?
-      <a href="{{ url_for('signup')}}">
-        <strong>Sign Up</strong>
-      </a>
-    </small>
-  </p>
+	  <p>
+	    <small>Need an account?
+	      <a href="{{ url_for('signup')}}">
+	        <strong>Sign Up</strong>
+	      </a>
+	    </small>
+	  </p>
 
-</div>
+	</div>
 {% endblock content %}
