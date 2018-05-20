@@ -10,7 +10,7 @@
 			<div class="form-group">	
 				
 				{% if form.email.errors %}
-					{{ form.email(class="form-control is-invalid", placeholder="Email Address")}}
+					{{ form.email(class="form-control is-invalid", id="inputEmail", placeholder="Email Address")}}
 					
 					<div class="invalid-feedback">
 							{% for error in form.email.errors %}
@@ -19,7 +19,7 @@
 					</div>
 					
 				{% else %}
-					{{ form.email(class="form-control", placeholder="Email Address")}}
+					{{ form.email(class="form-control", id="inputEmail", placeholder="Email Address")}}
 				{% endif %}
 				
 			</div>
@@ -27,7 +27,7 @@
 			<div class="form-group">
 				
 				{% if form.password.errors %}
-					{{ form.password(class="form-control", placeholder="Password")}}
+					{{ form.password(class="form-control", id="inputPassword", placeholder="Password")}}
 					
 					<div class="invalid-feedback">
 							{% for error in form.password.errors %}
@@ -36,7 +36,7 @@
 					</div>
 				
 				{% else %}
-					{{ form.password(class="form-control", placeholder="Name")}}
+					{{ form.password(class="form-control", id="inputPassword", placeholder="Name")}}
 				{% endif %}
 				
 			</div>
