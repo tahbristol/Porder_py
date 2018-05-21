@@ -1,35 +1,47 @@
 * {
-  font-family: 'Raleway', sans-serif;
+	font-family: 'Raleway', sans-serif;
 }
-
 button {
-  border-radius: 8px;
+	border-radius: 8px;
 }
-
 .background {
-
-  background-color: #879EB2;
+	background-color: #879EB2;
 }
-
 @media only screen and (min-width: 1200px ){
-  html {
-    height: 100%;
-  }
-
+	html {
+		height: 100%;
+	}
 }
 
+/******NAVIGATION******/
+.navButtons {
+	text-align: center;
+  margin-top: 20px;
+  font-size: 23px;
+	font-weight: 500;
+}
+.navButtons a {
+	margin-right: 20px;
+}
+
+.navButtons a:hover {
+	color: white;
+}
+
+#brand:hover {
+	color: white;
+}
 header h1 {
-  margin-left: 150px;
-  padding-top: 10px;
+	margin-left: 150px;
+	padding-top: 10px;
 }
-
 div.container.welcome.row {
-  width: 100%;
-  margin: 0px;
+	width: 100%;
+	margin: 0px;
 }
 
 .col-sm-12 {
-  text-align: center;
+	text-align: center;
 }
 
 .welcome {}
@@ -154,7 +166,6 @@ header a {
 #profile-card {
   border: 1px solid #4B4B4B;
   border-radius: 8px;
-
 }
 
 #profile-card .col-sm-6 {
@@ -166,10 +177,10 @@ header a {
 }
 
 @media only screen and (min-width: 750px) {
-    #profile-card {
-      width: 600px;
-      margin: 0 auto;
-    }
+	#profile-card {
+  	width: 600px;
+    margin: 0 auto;
+   }
 }
 
 /*********Login********/

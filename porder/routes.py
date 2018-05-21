@@ -1,7 +1,8 @@
 from flask import render_template, url_for, flash, redirect
-from porder import app
+from porder import app, db, bcrypt
 from porder.forms import SignupForm, LoginForm
 from porder.models import User, Item
+from flask_login import login_user, logout_user, current_user, login_required
 
 @app.route('/')
 @app.route('/home')
@@ -14,16 +15,39 @@ def about():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+	if current_user.is_authenticated:
+		return redirect(url_for('home'))
 	form = SignupForm()
 	if form.validate_on_submit():
-		flash('Account created for {}!'.format(form.name.data), 'success')
-		return redirect(url_for('home'))
+		hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		user = User(name=form.name.data, email=form.email.data, password=hashed_pw)
+		db.session.add(user)
+		db.session.commit()
+		flash('Account created for {}! You are now able to login.'.format(form.name.data), 'success')
+		return redirect(url_for('login'))
 	return render_template('users/new.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+	if current_user.is_authenticated:
+		return redirect(url_for('home'))
 	form = LoginForm()
 	if form.validate_on_submit():
-		return redirect(url_for('home'))
+		user = User.query.filter_by(email=form.email.data).first()
+		if user and bcrypt.check_password_hash(user.password, form.password.data):
+			login_user(user, remember=form.remember.data)
+			flash("Welcome Back, {}!".format(user.name), 'success')	
+			return redirect(url_for('show'))
+		else:
+			flash('Login Unsuccessful. Please check your email and password', 'danger')
 	return render_template('users/login.html', form=form)
 
+@app.route('/logout')
+def logout():
+	logout_user()
+	return redirect(url_for('home'))
+
+@app.route('/users/show')
+@login_required
+def show():
+	return render_template('users/show.html', user=current_user)
