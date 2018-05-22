@@ -1,5 +1,46 @@
 {% extends './layout.html' %}
 
 {% block content %}
-	<h1>Hello {{ user.name }}</h1>
+<div class="row">
+	<div class="col-sm-4">
+		<h1>Hello</h1>
+		<div class="card">
+	 	 <img src="{{url_for('static', filename='images/default.png')}}" alt="{{ user.name }}" style="width:100%">
+	 	 <h1>{{ user.name }}</h1>
+	 	 <p class="title">{{ user.email }}</p>
+	 	 <p>You have _ total Requests</p> 
+		</div>
+	</div>
+	
+	<div class="col-sm-8">
+		<h1>Request Table goes here</h1>
+			<div>
+				<table>
+					<thead>
+						<tr class="table100-head">
+							<th class="column1">Date</th>
+							<th class="column2">Order ID</th>
+							<th class="column3">Name</th>
+							<th class="column4">Price</th>
+							<th class="column5">Quantity</th>
+							<th class="column6">Total</th>
+						</tr>
+					</thead>
+					<tbody>
+							{% for item in user.requests %}
+							<tr>
+								<td class="column1">{{ item.request_date }}</td>
+								<td class="column2">Cat. No.</td>
+								<td class="column3">{{ item.name }}</td>
+								<td class="column4">${{ item.price }}</td>
+								<td class="column5">{{ item.quantity }}</td>
+								<td class="column6">{{ item.vendor }}</td>
+							</tr>
+							{% endfor %}
+							
+						</tbody>
+					</table>				
+			</div>
+	</div>
+	
 {% endblock content %}
