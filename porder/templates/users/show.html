@@ -8,7 +8,7 @@
 	 	 <img src="{{url_for('static', filename='images/default.png')}}" alt="{{ user.name }}" style="width:100%">
 	 	 <h1>{{ user.name }}</h1>
 	 	 <p class="title">{{ user.email }}</p>
-	 	 <p>You have _ total Requests</p> 
+	 	 <p>Total Requests: {{ user.requests|count }}</p> 
 		</div>
 	</div>
 	
@@ -23,13 +23,13 @@
 							<th class="column3">Name</th>
 							<th class="column4">Price</th>
 							<th class="column5">Quantity</th>
-							<th class="column6">Total</th>
+							<th class="column6">Vendor</th>
 						</tr>
 					</thead>
 					<tbody>
 							{% for item in user.requests %}
 							<tr>
-								<td class="column1">{{ item.request_date }}</td>
+								<td class="column1">{{ item.date_requested }}</td>
 								<td class="column2">Cat. No.</td>
 								<td class="column3">{{ item.name }}</td>
 								<td class="column4">${{ item.price }}</td>
