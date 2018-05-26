@@ -211,3 +211,13 @@ form#orderedRequests{
 #flashMessageContainer {
 	height: 75px;
 }
+
+#requestButtons {
+	text-align: right;
+	margin-bottom: 5px;
+}
+#requestButtons li {
+	width: 100px;
+	display: inline-block;
+	border-radius: 8px;
+}

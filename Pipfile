@@ -11,6 +11,8 @@ flask-wtf = "*"
 flask-sqlalchemy = "*"
 flask-bcrypt = "*"
 flask-login = "*"
+capybara-py = "*"
+selenium = "*"
 
 [requires]
 python_version = "3.5"

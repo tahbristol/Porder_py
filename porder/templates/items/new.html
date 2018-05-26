@@ -1,0 +1,32 @@
+{% extends './layout.html' %}
+
+{% block content %}
+
+	<form class="form" method="POST" action="">
+			{{ form.hidden_tag() }}
+		<table>
+			<thead>
+				<tr class="table100-head">
+					<th class="column1">Date</th>
+					<th class="column2">Order ID</th>
+					<th class="column3">Name</th>
+					<th class="column4">Price</th>
+					<th class="column5">Quantity</th>
+					<th class="column6">Vendor</th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<td class="column1"><small>Automatically added</small></td>
+						<td class="column2">Cat. No.</td>
+						<td class="column3">{{ form.name }}</td>
+						<td class="column4">{{ form.price }}</td>
+						<td class="column5">{{ form.quantity }}</td>
+						<td class="column6">{{ form.vendor }}</td>
+					</tr>
+					
+				</tbody>
+		</table>
+		 {{ form.submit(class="btn btn-lg btn-primary")}}
+	</form>
+{% endblock %}

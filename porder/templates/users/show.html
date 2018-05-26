@@ -13,7 +13,11 @@
 	</div>
 	
 	<div class="col-sm-8">
-		<h1>Request Table goes here</h1>
+		<h1>Your Requests</h1>
+		<ul id="requestButtons">
+			<li><a href="{{ url_for('item_new') }}"class="btn btn-success" id="addRequest">Add</a></li>
+			<li><a class="btn btn-success" id="removeRequest">Remove</a></li>
+		</ul>
 			<div>
 				<table>
 					<thead>
@@ -41,6 +45,6 @@
 						</tbody>
 					</table>				
 			</div>
-	</div>
+	</div> 
 	
 {% endblock content %}

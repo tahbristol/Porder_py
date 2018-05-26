@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, FloatField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from porder.models import User
 
@@ -22,3 +22,11 @@ class LoginForm(FlaskForm):
 	password = PasswordField('Password', validators=[DataRequired()])
 	remember = BooleanField('Remember Me')
 	submit = SubmitField('Login')
+
+class ItemForm(FlaskForm):
+	name = StringField('Name')
+	quantity = IntegerField('Qty')
+	price = FloatField('Price')
+	vendor = StringField('Vendor')
+	submit = SubmitField('Save')
+	

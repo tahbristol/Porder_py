@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect
 from porder import app, db, bcrypt
-from porder.forms import SignupForm, LoginForm
+from porder.forms import SignupForm, LoginForm, ItemForm
 from porder.models import User, Item
 from flask_login import login_user, logout_user, current_user, login_required
 
@@ -37,7 +37,7 @@ def login():
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			login_user(user, remember=form.remember.data)
 			flash("Welcome Back, {}!".format(user.name), 'success')	
-			return redirect(url_for('show'))
+			return redirect(url_for('user_show'))
 		else:
 			flash('Login Unsuccessful. Please check your email and password', 'danger')
 	return render_template('users/login.html', form=form)
@@ -49,5 +49,17 @@ def logout():
 
 @app.route('/users/show')
 @login_required
-def show():
+def user_show():
 	return render_template('users/show.html', user=current_user)
+	
+@app.route('/items/new', methods=['GET','POST'])
+@login_required
+def item_new():
+	form = ItemForm()
+	if form.validate_on_submit():
+		user = current_user
+		new_item = Item(name=form.name.data, quantity=form.quantity.data, vendor=form.vendor.data, price=form.price.data, user_id=user.id)
+		db.session.add(new_item)
+		db.session.commit()
+		return redirect(url_for('user_show'))
+	return render_template('items/new.html', form=form)
