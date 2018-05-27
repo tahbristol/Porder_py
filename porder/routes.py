@@ -50,7 +50,8 @@ def logout():
 @app.route('/users/show')
 @login_required
 def user_show():
-	return render_template('users/show.html', user=current_user)
+	form = ItemForm()
+	return render_template('users/show.html', user=current_user, form=form)
 	
 @app.route('/items/new', methods=['GET','POST'])
 @login_required

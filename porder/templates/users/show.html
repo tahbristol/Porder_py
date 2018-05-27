@@ -15,8 +15,8 @@
 	<div class="col-sm-8">
 		<h1>Your Requests</h1>
 		<ul id="requestButtons">
-			<li><a href="{{ url_for('item_new') }}"class="btn btn-success" id="addRequest">Add</a></li>
-			<li><a class="btn btn-success" id="removeRequest">Remove</a></li>
+			<li><a href="#"class="btn btn-success" id="addItem">Add</a></li>
+			<li><a class="btn btn-success" id="removeItem">Remove</a></li>
 		</ul>
 			<div>
 				<table>
@@ -27,10 +27,9 @@
 							<th class="column3">Name</th>
 							<th class="column4">Price</th>
 							<th class="column5">Quantity</th>
-							<th class="column6">Vendor</th>
-						</tr>
+							<th class="column6">Vendor</
 					</thead>
-					<tbody>
+					<tbody id="">
 							{% for item in user.requests %}
 							<tr>
 								<td class="column1">{{ item.date_requested }}</td>
@@ -43,8 +42,77 @@
 							{% endfor %}
 							
 						</tbody>
-					</table>				
+					</table>
+			</div>
+			
+			<div id="itemFormContainer">
+				<form class="form" method="POST" action="{{ url_for('item_new')}}">
+						{{ form.hidden_tag() }}
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Date</th>
+								<th class="column2">Order ID</th>
+								<th class="column3">Name</th>
+								<th class="column4">Price</th>
+								<th class="column5">Quantity</th>
+								<th class="column6">Vendor</th>
+							</tr>
+						</thead>
+						<tbody id="itemsListForForm">
+								<tr>
+									<td class="column1"><small>Automatically added</small></td>
+									<td class="column2">Cat. No.</td>
+									<td class="column3">{{ form.name }}</td>
+									<td class="column4">{{ form.price }}</td>
+									<td class="column5">{{ form.quantity }}</td>
+									<td class="column6">{{ form.vendor }}</td>
+								</tr>
+							</tbody>
+					</table>
+					 {{ form.submit(class="btn btn-lg btn-primary")}}
+				</form>
 			</div>
 	</div> 
 	
+	<script  type="text/x-handlebars-template" id="newItemTemplate">
+						<tr>
+							<td class="column1"><small>Automatically added</small></td>
+							<td class="column2">Cat. No.</td>
+							<td class="column3">{{ form.name }}</td>
+							<td class="column4">{{ form.price }}</td>
+							<td class="column5">{{ form.quantity }}</td>
+							<td class="column6">{{ form.vendor }}</td>
+						</tr>
+	</script>
 {% endblock content %}
+
+<script  type="text/x-handlebars-template" id="newItemTemplateForm">
+	<form class="form" method="POST" action="">
+			{{ form.hidden_tag() }}
+		<table>
+			<thead>
+				<tr class="table100-head">
+					<th class="column1">Date</th>
+					<th class="column2">Order ID</th>
+					<th class="column3">Name</th>
+					<th class="column4">Price</th>
+					<th class="column5">Quantity</th>
+					<th class="column6">Vendor</th>
+				</tr>
+			</thead>
+			<tbody id="itemsListForForm">
+					<tr>
+						<td class="column1"><small>Automatically added</small></td>
+						<td class="column2">Cat. No.</td>
+						<td class="column3">{{ form.name }}</td>
+						<td class="column4">{{ form.price }}</td>
+						<td class="column5">{{ form.quantity }}</td>
+						<td class="column6">{{ form.vendor }}</td>
+					</tr>
+				</tbody>
+		</table>
+		 {{ form.submit(class="btn btn-lg btn-primary")}}
+	</form>
+</script>
+

@@ -221,3 +221,6 @@ form#orderedRequests{
 	display: inline-block;
 	border-radius: 8px;
 }
+#itemFormContainer {
+	margin-top: 10px;
+}
