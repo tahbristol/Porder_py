@@ -64,7 +64,7 @@ def item_new():
 		db.session.commit()
 		return redirect(url_for('user_show'))
 	return render_template('items/new.html', form=form)
-
+	
 @app.route('/items/', methods=['GET'])
 @login_required
 def item_index():
@@ -74,11 +74,11 @@ def item_index():
 	result = item_schema.dump(all_items)
 	return jsonify(result.data)
 
-@app.route('/users/<user_id>/items', methods=['GET'])
+@app.route('/users/<int:id>/items', methods=['GET'])
 @login_required
-def user_items():
+def user_items(id):
 	item_schema = ItemSchema()
 	item_schema = ItemSchema(many=True)
-	user_items = Item.query.filter_by(user_id==current_user.id)
+	user_items = Item.query.filter(Item.user_id == id)
 	result = item_schema.dump(user_items)
 	return jsonify(result.data)

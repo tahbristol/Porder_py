@@ -13,6 +13,7 @@ flask-bcrypt = "*"
 flask-login = "*"
 capybara-py = "*"
 selenium = "*"
+flask-marshmallow = "*"
 
 [requires]
 python_version = "3.5"
