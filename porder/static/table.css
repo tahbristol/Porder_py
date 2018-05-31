@@ -266,3 +266,12 @@ tbody tr:hover {
     padding-right: 15px;
   }
 }
+
+td input {
+	
+	text-align: center;
+}
+input {
+	margin-right: auto;
+	margin-left: auto;
+}

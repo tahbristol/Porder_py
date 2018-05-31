@@ -31,7 +31,7 @@
 					</thead>
 					<tbody id="">
 							{% for item in user.requests %}
-							<tr>
+							<tr id="item-{{ item.id }}" class="userItemsList">
 								<td class="column1">{{ item.date_requested }}</td>
 								<td class="column2">Cat. No.</td>
 								<td class="column3">{{ item.name }}</td>

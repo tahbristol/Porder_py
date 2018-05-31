@@ -31,4 +31,11 @@ $(document).ready(function() {
       $('#inputPassword').val('password');
     }
   });
+	
+	Array.prototype.forEach.call($('.userItemsList'), function(item){
+		$(item).on('click', function(e){
+			let id = $(this).attr('id').split('-')[1]
+			window.location = `/items/${id}/edit`;
+		})
+	})
 });

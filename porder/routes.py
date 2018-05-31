@@ -53,7 +53,7 @@ def user_show():
 	form = ItemForm()
 	return render_template('users/show.html', user=current_user, form=form)
 	
-@app.route('/items/new', methods=['GET','POST'])
+@app.route('/items/new', methods=['POST'])
 @login_required
 def item_new():
 	form = ItemForm()
@@ -62,5 +62,17 @@ def item_new():
 		new_item = Item(name=form.name.data, quantity=form.quantity.data, vendor=form.vendor.data, price=form.price.data, user_id=user.id)
 		db.session.add(new_item)
 		db.session.commit()
+	return redirect(url_for('user_show'))
+	#return render_template('/users/show.html', user=current_user, form=form)
+
+@app.route('/items/<int:id>/edit', methods=['GET', 'PATCH'])
+@login_required
+def item_edit(id):
+	item = Item.query.filter(Item.id == id).first()
+	form = ItemForm()
+	if form.validate_on_submit():
+		updated_item = Item(name=form.name.data, quantity=form.quantity.data, vendor=form.vendor.data, price=form.price.data, user_id=user.id)
+		db.session.add(updated_item)
+		db.session.commit()
 		return redirect(url_for('user_show'))
-	return render_template('items/new.html', form=form)
+	return render_template('items/edit.html', form=form, item=item)
