@@ -1,7 +1,7 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, jsonify
 from porder import app, db, bcrypt
 from porder.forms import SignupForm, LoginForm, ItemForm
-from porder.models import User, Item
+from porder.models import User, Item, UserSchema, ItemSchema
 from flask_login import login_user, logout_user, current_user, login_required
 
 @app.route('/')
@@ -64,3 +64,21 @@ def item_new():
 		db.session.commit()
 		return redirect(url_for('user_show'))
 	return render_template('items/new.html', form=form)
+
+@app.route('/items/', methods=['GET'])
+@login_required
+def item_index():
+	item_schema = ItemSchema()
+	item_schema = ItemSchema(many=True)
+	all_items = Item.query.all()
+	result = item_schema.dump(all_items)
+	return jsonify(result.data)
+
+@app.route('/users/<user_id>/items', methods=['GET'])
+@login_required
+def user_items():
+	item_schema = ItemSchema()
+	item_schema = ItemSchema(many=True)
+	user_items = Item.query.filter_by(user_id==current_user.id)
+	result = item_schema.dump(user_items)
+	return jsonify(result.data)

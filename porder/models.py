@@ -1,6 +1,7 @@
 from datetime import datetime
 from porder import db, login_manager
 from flask_login import UserMixin
+from porder import ma
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -17,6 +18,11 @@ class User(db.Model, UserMixin):
 	def __repr__(self):
 		return "User('{}','{}',{})".format(self.name, self.email, self.image_file)
 
+
+class UserSchema(ma.Schema):
+	class Meta:
+		fields = ('name', 'email',)
+
 class Item(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(120), unique=False, nullable=False)
@@ -31,3 +37,9 @@ class Item(db.Model):
 	def __repr__(self):
 		return "Item: {}, Qty: {}, Vendor: {}, Price: {}".format(self.name, self.quantity, self.vendor, self.price)
 
+
+class ItemSchema(ma.Schema):
+	class Meta:
+		fields = ('id', 'name', 'quantity',
+		 		'vendor', 'price', 'link', 'ordered',
+			    'date_requested', 'user_id' )
