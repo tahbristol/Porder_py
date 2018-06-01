@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, jsonify
+from flask import render_template, url_for, flash, redirect, jsonify, request
 from porder import app, db, bcrypt
 from porder.forms import SignupForm, LoginForm, ItemForm
 from porder.models import User, Item, UserSchema, ItemSchema
@@ -30,7 +30,7 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
-		return redirect(url_for('home'))
+		return redirect(url_for('user_show'))
 	form = LoginForm()
 	if form.validate_on_submit():
 		user = User.query.filter_by(email=form.email.data).first()
@@ -57,12 +57,20 @@ def user_show():
 @login_required
 def item_new():
 	form = ItemForm()
+	user = current_user
 	if form.validate_on_submit():
-		user = current_user
 		new_item = Item(name=form.name.data, quantity=form.quantity.data, vendor=form.vendor.data, price=form.price.data, user_id=user.id)
 		db.session.add(new_item)
 		db.session.commit()
 		return redirect(url_for('user_show'))
+	elif request.get_json():
+		data = request.get_json()
+		new_item = Item(name=data['name'], quantity=data['quantity'], vendor=data['vendor'], price=data['price'], user_id=data['user_id'])
+		db.session.add(new_item)
+		db.session.commit()
+		item_schema = ItemSchema()
+		result = item_schema.dump(new_item)
+		return jsonify(result.data)
 	return render_template('items/new.html', form=form)
 	
 @app.route('/items/', methods=['GET'])
