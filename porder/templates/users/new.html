@@ -4,7 +4,7 @@
 <div class="container signupPage">
   <form class="form-signin form-signup" action="" method="POST">
 		{{ form.hidden_tag() }}
-    <h2 class="form-signin-heading">Sign Up</h2>
+    <h2 class="form-signin-heading">Sign Up</h2><br />
 		<div class="form-group">	
 			{% if form.name.errors %}
 				{{ form.name(class="form-control", placeholder="Name")}}
@@ -40,7 +40,7 @@
 						{% endfor %}
 				</div>
 			{% else %}
-				{{ form.password(class="form-control", placeholder="Name")}}
+				{{ form.password(class="form-control", placeholder="Password")}}
 			{% endif %}
 		</div>
 		
