@@ -6,7 +6,7 @@ export const Header = () => {
 			<div className="container">
 				<div className="row">
 					<div className="col-sm-6">
-						<a href="">
+						<a href="/">
 							<h1 id="brand">pOrder</h1>
 						</a>
 					</div>
