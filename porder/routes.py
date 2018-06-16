@@ -74,7 +74,7 @@ def item_new():
 	return render_template('items/new.html', form=form)
 	
 @app.route('/items/', methods=['GET'])
-@login_required
+#@login_required
 def item_index():
 	item_schema = ItemSchema()
 	item_schema = ItemSchema(many=True)

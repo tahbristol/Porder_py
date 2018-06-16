@@ -5,6 +5,7 @@
   <form class="form-signin form-signup" action="" method="POST">
 		{{ form.hidden_tag() }}
     <h2 class="form-signin-heading">Sign Up</h2>
+		<br />
 		<div class="form-group">	
 			{% if form.name.errors %}
 				{{ form.name(class="form-control", placeholder="Name")}}

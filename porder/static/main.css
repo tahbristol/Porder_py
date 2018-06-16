@@ -183,7 +183,7 @@ header a {
    }
 }
 
-/*********Login********/
+/******Login******/
 
 #loginButton {
   border-bottom: 1px solid black;
@@ -193,13 +193,16 @@ header a {
   margin-top: 100px;
 }
 
-/********Requests*******/
+.form-signin input[type=checkbox] {
+	display: inline-block;
+}
+/******Requests******/
 
 .requests, .newRequests, .editRequests {
   margin-top: 100px;
 }
 
-/*********Buttons***********/
+/******Buttons******/
 
 input#deleteForm, input#newForm, input#cancelForm, button#addLine {
   margin-bottom: 25px;
